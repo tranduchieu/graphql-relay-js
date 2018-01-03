@@ -89,7 +89,7 @@ export function connectionDefinitions(
   const connectionFields = config.connectionFields || {};
   const resolveNode = config.resolveNode;
   const resolveCursor = config.resolveCursor;
-  const edgeType = new GraphQLObjectType({
+  const edgeType = new GraphQLNonNull(new GraphQLObjectType({
     name: name + 'Edge',
     description: 'An edge in a connection.',
     fields: () => ({
@@ -105,7 +105,7 @@ export function connectionDefinitions(
       },
       ...(resolveMaybeThunk(edgeFields): any)
     }),
-  });
+  }));
 
   const connectionType = new GraphQLObjectType({
     name: name + 'Connection',
@@ -116,7 +116,7 @@ export function connectionDefinitions(
         description: 'Information to aid in pagination.'
       },
       edges: {
-        type: new GraphQLList(edgeType),
+        type: new GraphQLNonNull(new GraphQLList( new GraphQLNonNull(edgeType))),
         description: 'A list of edges.'
       },
       ...(resolveMaybeThunk(connectionFields): any)
