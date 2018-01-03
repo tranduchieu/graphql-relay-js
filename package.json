@@ -1,5 +1,5 @@
 {
-  "name": "@tranduchieu/graphql-relay",
+  "name": "graphql-relay",
   "version": "0.5.4",
   "description": "A library to help construct a graphql-js server supporting react-relay.",
   "contributors": [
